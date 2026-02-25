@@ -11,16 +11,47 @@ class Game {
     private:
       std::vector<Player*> players;
       Pack pack;
-      // ...
+      bool doShuffle;
     
       void shuffle() {
-          istream input(pack_filename);
-          Pack::Pack(&pack_filename);
-          Pack::shuffle();
+          if (doShuffle) {
+              pack.shuffle()
+            else {
+                pack.reset();
+            }
+          }
       }
-      void deal(pack, players) {
+      Card deal(int dealer) {
+        player[0] = (dealer + 1) % 4;  
+        player[1] = (dealer + 2) % 4;
+        player[2] = (dealer + 3) % 4;
+        player[3] = (dealer + 4) % 4;  
+
+        for (size_t i = 0; i < 4; ++i) {
+            if (i%2 = 0) {
+                players[i]->add_card(pack.deal_one());
+                players[i]->add_card(pack.deal_one());
+                players[i]->add_card(pack.deal_one());
+            } else {
+                players[i]->add_card(pack.deal_one());
+                players[i]->add_card(pack.deal_one());
+            }
+        }
           
-      }
+        for (size_t i = 0; i < 4; ++i) {
+            if (i%2 = 0) {
+                players[i]->add_card(pack.deal_one());
+                players[i]->add_card(pack.deal_one());
+            } else {
+                players[i]->add_card(pack.deal_one());
+                players[i]->add_card(pack.deal_one());
+                players[i]->add_card(pack.deal_one());
+            }
+        }
+          
+        Card upcard = pack.deal_one();
+        return upcard;
+}
       void make_trump(/* ... */);
       void play_hand(/* ... */);
       // ...
@@ -29,7 +60,7 @@ class Game {
 int main(int argc, char *argv[]) {
 
     if (argc != 12 || (atoi(argv[3]) > 100 || atoi(argv[3]) < 1) 
-    || ((argv[3] != "noshuffle") || (argv[3] != "shuffle")) || 
+    || ((argv[2] != "noshuffle") || (argv[2] != "shuffle")) || 
     ((argv[5] != "Simple" || argv[7] != "Simple" || argv[9] != "Simple" 
     || argv[11] != "Simple" || argv[5] != "Human" || argv[7] != "Human" 
     || argv[9] != "Human" || argv[11] != "Human"))) {
