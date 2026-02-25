@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ifstream>
+#include "Pack.hpp"
 using namespace std;
 
 class Game {
@@ -13,9 +14,13 @@ class Game {
       // ...
     
       void shuffle() {
+          istream input(pack_filename);
+          Pack::Pack(&pack_filename);
+          Pack::shuffle();
+      }
+      void deal(pack, players) {
           
       }
-      void deal(/* ... */);
       void make_trump(/* ... */);
       void play_hand(/* ... */);
       // ...
