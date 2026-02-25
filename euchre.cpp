@@ -141,8 +141,7 @@ class Game {
                 } else {                 
                     team13_score += 2;
                 }
-            } 
-            else {
+            } else {
                 if (maker_team == 0) {
                     team02_score += 1;
                 } else {
@@ -193,6 +192,21 @@ int main(int argc, char *argv[]) {
     if (!file.is_open()) {
      cout << "Error opening " << pack_filename << endl;
     }
+
+    const bool doShuffle = (string(argv[2] == "shuffle");
+    const int points_to_win = atoi(argv[3]);
+    Pack pack(pack_filename);
+    vector<Player*> players;
+    for (int i = 4; i < 10; i += 2) {
+        players.push_back(Player_factory(argv[i], argv[i+1]));
+    }
+
+    for (int i = 0; i < argc; ++i) {
+        cout << argc[i] << endl;
+    }
+
+    Game game(players, pack, doShuffle, points_to_win, 
+    game.play();
     
     for (size_t i = 0; i < players.size(); ++i) {
       delete players[i];
