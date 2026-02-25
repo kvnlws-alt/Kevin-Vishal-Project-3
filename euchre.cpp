@@ -51,7 +51,7 @@ class Game {
           
         Card upcard = pack.deal_one();
         return upcard;
-    }
+     }
       Suit make_trump(const Card &upcard, int dealer, int &maker_idx) {
         Suit order_up_suit;
 
@@ -83,7 +83,7 @@ class Game {
                 cout << *players[player_idx] << " passes" << endl;
             }
         }
-    }
+     }
       void play_tricks(int dealer, Suit trump, int maker_idx,
                  int &tricks02, int &tricks13) {
     
@@ -119,6 +119,57 @@ class Game {
     
             leader = winning_player;
         }
+    }
+
+    void score_hand(int maker_idx, int tricks02, int tricks13) {
+    
+        int maker_team = maker_idx % 2; // 0 = team 0&2, 1 = team 1&3
+        int maker_tricks   = (maker_team == 0) ? tricks02 : tricks13;
+        int defender_tricks = (maker_team == 0) ? tricks13 : tricks02;
+    
+        if (maker_tricks >= 3) {
+            if (maker_team == 0) {
+                cout << *players[0] << " and " << *players[2] << " win the hand" << endl;
+            } else {
+                cout << *players[1] << " and " << *players[3] << " win the hand" << endl;
+            }
+
+            if (maker_tricks == 5) {
+                cout << "march!" << endl;
+                if (maker_team == 0) { 
+                    team02_score += 2;
+                } else {                 
+                    team13_score += 2;
+                }
+            } 
+            else {
+                if (maker_team == 0) {
+                    team02_score += 1;
+                } else {
+                    team13_score += 1;
+                }
+            }
+        } else {
+            int defender_team = 1 - maker_team;
+    
+            if (defender_team == 0) {
+                cout << *players[0] << " and " << *players[2] << " win the hand" << endl;
+            } else {
+                cout << *players[1] << " and " << *players[3] << " win the hand" << endl;
+            }
+    
+            cout << "euchred!" << endl;
+    
+            if (defender_team == 0) {
+                team02_score += 2;
+            } else {
+                team13_score += 2;
+            }
+        }
+    
+        cout << *players[0] << " and " << *players[2] << " have " << team02_score << " points" << endl;
+        cout << *players[1] << " and " << *players[3] << " have " << team13_score << " points" << endl;
+        cout << endl;
     }
 };
 
