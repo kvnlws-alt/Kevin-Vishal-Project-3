@@ -1,5 +1,25 @@
 #include <iostream>
+#include <ifstream>
 using namespace std;
+
+class Game {
+    public:
+      Game(/* ... */);
+      void play();
+    
+    private:
+      std::vector<Player*> players;
+      Pack pack;
+      // ...
+    
+      void shuffle() {
+          
+      }
+      void deal(/* ... */);
+      void make_trump(/* ... */);
+      void play_hand(/* ... */);
+      // ...
+};
 
 int main(int argc, char *argv[]) {
 
@@ -15,8 +35,14 @@ int main(int argc, char *argv[]) {
     
      return 67;
     }
-
-    if () {
+    
+    const string pack_filename = argv[1];
+    ifstream file(pack_filename);
+    if (!file.is_open()) {
      cout << "Error opening " << pack_filename << endl;
+    }
+    
+    for (size_t i = 0; i < players.size(); ++i) {
+      delete players[i];
     }
 }
